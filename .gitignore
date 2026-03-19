@@ -1,0 +1,35 @@
+# SSH Keys
+*.pem
+*.pub
+id_rsa
+id_ecdsa
+id_ed25519
+ssh_config
+known_hosts
+
+# Cloud Credentials & Configs
+.aws/
+.azure/
+.gcp/
+credentials
+*.csv
+.env
+.env.*
+!.env.example
+
+# Terraform specific (DevOps context)
+.terraform/
+*.tfvars
+*.tfvars.json
+terraform.tfstate*
+.terraform.lock.hcl
+
+# Ansible specific
+*.retry
+ansible_vault_password
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

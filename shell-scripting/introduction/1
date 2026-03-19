@@ -1,0 +1,18 @@
+#!/bin/bash
+echo "Shell Scripting"
+
+name="John"
+echo "Name is $name"
+
+## Take Input
+
+echo "Input the name"
+read username
+echo "$username"
+
+
+## Arguments
+
+echo "Print the Arguments here"
+echo "$0 - $1 - $2"
+

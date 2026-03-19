@@ -1,0 +1,28 @@
+- name: Install Nginx on EC2
+  hosts: dev
+  become: true  # Make sure you have sudo privileges
+  gather_facts: true
+
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+
+    - name: Update nginx config
+      ansible.builtin.copy:
+        src: rajat.conf
+        dest: /etc/nginx/conf.d/rajat.conf # Use standard directory
+      notify: Restart Nginx
+
+    - name: Start and enable Nginx service
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
+
+  handlers:
+    - name: Restart Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted

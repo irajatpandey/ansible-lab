@@ -1,0 +1,13 @@
+---
+- name: Hello from macOS to EC2
+  hosts: dev
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Print connection success
+      debug:
+        msg: "Connected! Remote host: {{ inventory_hostname }}, Python: {{ ansible_python_version }}"
+
+    - name: Show OS info
+      debug:
+        msg: "{{ ansible_distribution }} {{ ansible_distribution_version }}"
