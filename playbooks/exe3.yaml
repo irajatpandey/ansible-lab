@@ -1,0 +1,44 @@
+# Next Level (Ab asli maza aayega)
+# 🧪 Exercise 5: Loop + Condition + Register
+
+# 👉 Scenario:
+
+# Install packages:
+# git
+# nginx
+# curl
+
+# 👉 BUT:
+
+# Agar package already installed hai → skip log karo
+# Agar install hua → print message
+# 🎯 Requirements:
+# Loop use karo
+# register use karo
+# when use karo
+
+
+name: install git nginx curl
+become: yes
+
+tasks:
+  ansible.builtin.apt:
+    - name: {{ item }}
+      state: present
+      loop:
+       - git
+       - nginx
+       - curl
+      register: pkg_result
+      
+    - name: Print installed packages
+      ansible.builtin.debug:
+        msg: "{{ item.item }} was installed"
+      loop: "{{ pkg_result.results }}"
+      when: item.changed
+
+    - name: Print skipped packages
+      ansible.builtin.debug:
+        msg: "{{ item.item }} already present"
+      loop: "{{ pkg_result.results }}"
+      when: not item.changed

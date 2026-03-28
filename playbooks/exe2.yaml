@@ -1,0 +1,17 @@
+- name: Ensure Apache ServerName is configured
+  hosts: dev
+  become: true
+
+  tasks:
+    - name: Ensure ServerName is set in config
+      ansible.builtin.lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^ServerName'
+        line: 'ServerName localhost'
+      notify: Restart Apache
+
+  handlers:
+    - name: Restart Apache
+      ansible.builtin.service:
+        name: httpd
+        state: restarted

@@ -1,0 +1,17 @@
+name: exe4
+become: yes
+hosts: dev
+
+tasks:
+ - name: Ensure directory exists
+   file:
+    path: /etc/myapp
+    state: directory
+
+ - name: copy files
+   ansible.builtin.copy:
+    src: /tmp/app.conf
+    dest: /etc/myapp/app.conf
+    mode: '0644'
+    owner: root
+    state: present
