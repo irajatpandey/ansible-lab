@@ -1,0 +1,16 @@
+- name: Install based on environment
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install nginx on dev
+      ansible.builtin.package:
+        name: nginx
+        state: present
+      when: "'dev' in group_names"
+
+    - name: Install apache on prod
+      ansible.builtin.package:
+        name: httpd
+        state: present
+      when: "'prod' in group_names"
