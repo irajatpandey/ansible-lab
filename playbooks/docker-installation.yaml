@@ -1,0 +1,16 @@
+name: Docker Installation on EC2
+hosts: dev
+become: true  # Ensure you have sudo privileges
+gather_facts: true
+
+tasks:
+  - name: Install Docker on EC2
+    ansible.builtin.yum:
+      name: docker
+      state: present
+
+  - name: Start and enable Docker service
+    ansible.builtin.service:
+      name: docker
+      state: started
+      enabled: true
